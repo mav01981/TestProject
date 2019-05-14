@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <AssemblyName>BluePrism.Service</AssemblyName>
+    <RootNamespace>BluePrism.Service</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Update="words-english.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
