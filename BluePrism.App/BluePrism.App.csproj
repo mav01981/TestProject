@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Service\BluePrism.Service.csproj" />
+    <ProjectReference Include="..\BluePrism.Service\BluePrism.Service.csproj" />
   </ItemGroup>
 
 </Project>

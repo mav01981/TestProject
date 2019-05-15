@@ -1,4 +1,5 @@
 ﻿using BluePrism.Service;
+using BluePrism.Service.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -19,6 +20,7 @@ namespace BluePrism.App
 
             var serviceProvider = new ServiceCollection()
                         .AddSingleton<IFileservice, FileService>()
+                        .AddSingleton<IValidationService, ValidationService>()
                         .AddSingleton<IDictionaryService, DictionaryService>()
                         .BuildServiceProvider();
 

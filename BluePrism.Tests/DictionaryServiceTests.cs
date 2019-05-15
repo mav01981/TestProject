@@ -32,22 +32,30 @@ namespace BluePrism.Tests
             };
         }
 
-        [Theory(DisplayName = "Given Spin, Spat returns 2 character difference")]
-        [InlineData("Spin", "Spat")]
-        public void Given_Two_Words_Char_Difference_Two_Words(string word1, string word2)
+        [Theory(DisplayName = "Given 5 or more letter words IsValidNextWord returns false")]
+        [InlineData("spin", "spiritual")]
+        [InlineData("spot", "splint")]
+        public void Given_4_Letter_Words_As_IsValidNextWord_returns_False(string word1, string word2)
         {
             //Arrange
+            var validationService = new ValidationService();
             //Act
-            int charDiff = 0;
-            foreach (var c in word1.ToCharArray())
-            {
-                if (word2.IndexOf(c) == -1)
-                {
-                    charDiff += 1;
-                }
-            }
+            bool result = validationService.ISvalidNextWord(word1, word2);
             //Assert
-            charDiff.Should().Be(2);
+            result.Should().Be(false);
+        }
+
+        [Theory(DisplayName = "Given 3 Letter Words As IsValidNextWord Returns False")]
+        [InlineData("spin", "spy")]
+        [InlineData("spot", "so")]
+        public void Given_3_Letter_Words_As_IsValidNextWord_returns_False(string word1, string word2)
+        {
+            //Arrange
+            var validationService = new ValidationService();
+            //Act
+            bool result = validationService.ISvalidNextWord(word1, word2);
+            //Assert
+            result.Should().Be(false);
         }
 
         [Theory(DisplayName = "Given Spit,Spat returns 1 character difference")]
@@ -55,28 +63,22 @@ namespace BluePrism.Tests
         public void Given_Three_Words_Char_Difference_Two_Words(string word1, string word2)
         {
             //Arrange
+            var validationService = new ValidationService();
             //Act
-            int charDiff = 0;
-            foreach (var c in word1.ToCharArray())
-            {
-                if (word2.IndexOf(c) == -1)
-                {
-                    charDiff += 1;
-                }
-            }
+            bool result = validationService.ISvalidNextWord(word1, word2);
             //Assert
-            charDiff.Should().Be(1);
+            result.Should().Be(true);
         }
 
-        [Fact(DisplayName = "Given No Data in file returns Empty results")]
+        [Fact(DisplayName = "Given No Data in file returns empty list")]
         public void Given_No_Strings_In_File_returns_Empty_Results()
         {
             //Arrange
             var mockedFileService = new Mock<IFileservice>();
             mockedFileService.Setup(x => x.Read(It.IsAny<string>())).Returns(new string[0]);
-
+            var validationService = new ValidationService();
             //Act
-            var service = new DictionaryService(mockedFileService.Object);
+            var service = new DictionaryService(mockedFileService.Object, validationService);
             var result = service.CreateResult(It.IsAny<string>(), "Spin", "Spot", It.IsAny<string>());
             //Assert
             result.Count.Should().Be(0);
@@ -88,9 +90,9 @@ namespace BluePrism.Tests
             //Arrange
             var mockedFileService = new Mock<IFileservice>();
             mockedFileService.Setup(x => x.Read(It.IsAny<string>())).Returns(CreateSUT());
-
+            var validationService = new ValidationService();
             //Act
-            var service = new DictionaryService(mockedFileService.Object);
+            var service = new DictionaryService(mockedFileService.Object, validationService);
             var result = service.CreateResult(It.IsAny<string>(), "Spin", "Spot", It.IsAny<string>());
             //Assert
             result.Should().Equal(new List<string>()
@@ -107,9 +109,9 @@ namespace BluePrism.Tests
             //Arrange
             var mockedFileService = new Mock<IFileservice>();
             mockedFileService.Setup(x => x.Read(It.IsAny<string>())).Returns(CreateSUTDuplicatedData());
-
+            var validationService = new ValidationService();
             //Act
-            var service = new DictionaryService(mockedFileService.Object);
+            var service = new DictionaryService(mockedFileService.Object, validationService);
             var result = service.CreateResult(It.IsAny<string>(), "Spin", "Spot", It.IsAny<string>());
             //Assert
             result.Should().Equal(new List<string>()
@@ -126,9 +128,9 @@ namespace BluePrism.Tests
             //Arrange
             var mockedFileService = new Mock<IFileservice>();
             mockedFileService.Setup(x => x.Read(It.IsAny<string>())).Returns(CreateSUTMoreThanOneCharacterDifference());
-
+            var validationService = new ValidationService();
             //Act
-            var service = new DictionaryService(mockedFileService.Object);
+            var service = new DictionaryService(mockedFileService.Object, validationService);
             var result = service.CreateResult(It.IsAny<string>(), "Spin", "Spot", It.IsAny<string>());
             //Assert
             result.Should().Equal(new List<string>()
