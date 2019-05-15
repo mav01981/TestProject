@@ -40,9 +40,9 @@ BluePrisim.App - Console Application
 ```
 ### Tech Stack
 
-netcoreapp2.1
-Moq
-FluentAssertions
-xunit
+* netcoreapp2.1
+* Moq
+* FluentAssertions
+* xunit
 
 
