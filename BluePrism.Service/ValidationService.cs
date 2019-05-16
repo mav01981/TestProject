@@ -5,11 +5,13 @@ namespace BluePrism.Service
 {
     public class ValidationService : IValidationService
     {
-        public bool ISvalidNextWord(string previousWord, string nextWord)
+        public bool IsValidNextWord(string previousWord, string nextWord)
         {
             if (nextWord.Length != 4) return false;
 
-            return previousWord.Except(nextWord).Count() == 1;
+            var counter = previousWord.Where((t, i) => nextWord[i] != t).Count();
+
+            return counter == 1;
         }
     }
 }

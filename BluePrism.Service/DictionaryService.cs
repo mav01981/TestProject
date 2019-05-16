@@ -69,11 +69,11 @@ namespace BluePrism.Service
 
         private string GetNextWord(string lastword, string nextword, string endWord)
         {
-            if (_validationService.ISvalidNextWord(lastword, endWord))
+            if (_validationService.IsValidNextWord(lastword, endWord))
             {
                 return endWord;
             }
-            else if (_validationService.ISvalidNextWord(lastword, nextword))
+            else if (_validationService.IsValidNextWord(lastword, nextword))
             {
                 return nextword;
             }

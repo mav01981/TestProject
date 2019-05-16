@@ -2,6 +2,6 @@
 {
     public interface IValidationService
     {
-        bool ISvalidNextWord(string previousWord, string nextWord);
+        bool IsValidNextWord(string previousWord, string nextWord);
     }
 }
