@@ -40,7 +40,7 @@ namespace BluePrism.Tests
             //Arrange
             var validationService = new ValidationService();
             //Act
-            bool result = validationService.ISvalidNextWord(word1, word2);
+            bool result = validationService.IsValidNextWord(word1, word2);
             //Assert
             result.Should().Be(false);
         }
@@ -53,7 +53,7 @@ namespace BluePrism.Tests
             //Arrange
             var validationService = new ValidationService();
             //Act
-            bool result = validationService.ISvalidNextWord(word1, word2);
+            bool result = validationService.IsValidNextWord(word1, word2);
             //Assert
             result.Should().Be(false);
         }
@@ -65,9 +65,21 @@ namespace BluePrism.Tests
             //Arrange
             var validationService = new ValidationService();
             //Act
-            bool result = validationService.ISvalidNextWord(word1, word2);
+            bool result = validationService.IsValidNextWord(word1, word2);
             //Assert
             result.Should().Be(true);
+        }
+
+        [Theory(DisplayName = "Given 2 character difference As IsValidNextWord Returns False")]
+        [InlineData("camp", "cape")]
+        public void Given_2_Letter_Words_As_IsValidNextWord_returns_False(string word1, string word2)
+        {
+            //Arrange
+            var validationService = new ValidationService();
+            //Act
+            bool result = validationService.IsValidNextWord(word1, word2);
+            //Assert
+            result.Should().Be(false);
         }
 
         [Fact(DisplayName = "Given No Data in file returns empty list")]
