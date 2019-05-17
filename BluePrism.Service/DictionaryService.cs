@@ -62,6 +62,9 @@ namespace BluePrism.Service
 
                     if (word.Length > 0)
                         results.Add(word);
+
+                    if (word == endWord)
+                        break;
                 }
             }
             return results;
